@@ -1,0 +1,82 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/robotis/turtlebot/protos/TurtleBot3Burger.proto"
+
+WorldInfo {
+  info [
+    "This example shows a robot following a red ball in Webots."
+    "The robot uses a HSV thresholding (using OpenCV) to detect the red ball and a simple P controller to track it."
+  ]
+  title "Webots Visual Tracking Example"
+}
+Viewpoint {
+  orientation -0.43631205283563945 0.2707574430126094 0.8580921859588418 2.162987229816244
+  position 2.156624762995514 -3.9067206484330494 6.099611901250708
+}
+RectangleArena {
+  floorSize 3 3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+TurtleBot3Burger {
+  hidden position_0_0 5.724461032021816
+  hidden position_0_1 -5.724460802860795
+  hidden position_0_2 42.881274957378324
+  hidden position2_0_2 -0.031017940826993405
+  hidden position3_0_2 0.04806011429203855
+  hidden linearVelocity_0 0.009977452824654277 0.006070056455800342 1.5255560844222408e-07
+  hidden angularVelocity_0 1.4335560507922645e-05 -3.979146805580546e-05 0.3340778997486106
+  hidden rotation_2 0 1 0 4.1536650320218165
+  hidden linearVelocity_2 -0.013927722371664095 0.022797551392643105 3.1181506230850288e-06
+  hidden angularVelocity_2 -0.7682480794347103 -0.4688566354156798 0.33462690771361003
+  hidden rotation_3 0.8746714523903717 -6.415966637983858e-07 0.48471625759087783 3.1415971267668352
+  hidden linearVelocity_3 0.01392477194817929 -0.022838270069714357 -3.3879943084766963e-06
+  hidden angularVelocity_3 0.7682767611789709 0.4687770368936348 0.33462598091569595
+  hidden rotation_4 0.9984902551700409 0.001054011150461297 -0.05491902576485781 5.187822575546532
+  hidden linearVelocity_4 0.023065942705983375 0.01405808780628398 5.278280129048053e-07
+  hidden angularVelocity_4 -3.514521937342223 5.766485655998528 -8.117650399263868e-16
+  translation -0.0002504559491400618 0.00010488156482182584 -0.00020951579484771582
+  rotation 0.0022055733528073447 -0.0012295181588509558 0.9999968118605592 2.1248703594966543
+  controller "visual_tracker"
+  extensionSlot [
+    Camera {
+      translation 0.02 0 0.03
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.03 0.1 0.03
+          }
+        }
+      ]
+    }
+  ]
+}
+DEF BALL Solid {
+  translation -0.6045522710579269 0.7965654722360886 0.2
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        metalness 0
+        normalMapFactor 0
+        occlusionMapStrength 0
+        emissiveIntensity 0
+      }
+      geometry Sphere {
+        radius 0.1
+        subdivision 4
+      }
+    }
+  ]
+}
+Robot {
+  controller "ball_supervisor"
+  supervisor TRUE
+}
